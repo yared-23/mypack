@@ -1,0 +1,27 @@
+EditText myEdit = (EditText)findViewById(R.id.my_edit);
+
+if (TextUtils.isEmpty(myEdit.getText().toString())) {
+    // set the warning
+    myEdit.requestFocus();
+
+    // show error icon
+    myEdit.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.error_sign, 0);
+
+    // remove the error icon on key press
+    myEdit.setOnKeyListener(new OnKeyListener() {
+
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+            EditText eText = (EditText)v;
+
+            // remove error sign
+            eText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+
+            // remove this key handler
+            eText.setOnKeyListener(null);
+
+            return false;
+        }
+    });
+}
